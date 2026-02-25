@@ -69,3 +69,18 @@ Valor: ${valorFormatado}
 Status: ${consulta.status}
 `;
 }
+const consulta1 = criarConsulta(1, medico1, paciente1, new Date(), 350);
+
+const consulta2: Consulta = {
+  ...consulta1,
+  id: 2,
+  status: "realizada",
+};
+
+const consulta3: Consulta = {
+  ...consulta1,
+  id: 3,
+  status: "cancelada",
+};
+
+const consultas: Consulta[] = [consulta1, consulta2, consulta3];
