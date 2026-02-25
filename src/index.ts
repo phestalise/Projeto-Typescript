@@ -84,3 +84,10 @@ const consulta3: Consulta = {
 };
 
 const consultas: Consulta[] = [consulta1, consulta2, consulta3];
+
+function listarConsultasPorStatus(
+  consultas: Consulta[],
+  status: StatusConsulta
+): Consulta[] {
+  return consultas.filter((c) => c.status === status);
+}
