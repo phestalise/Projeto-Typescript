@@ -106,3 +106,15 @@ function calcularFaturamento(
     .filter((c) => c.status === "realizada")
     .reduce((total, c) => total + c.valor, 0);
 }
+console.log("=== CONSULTAS REALIZADAS ===");
+listarConsultasPorStatus(consultas, "realizada").forEach((c) =>
+  console.log(exibirConsulta(c))
+);
+
+console.log("Faturamento total:");
+console.log(
+  calcularFaturamento(consultas).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  })
+);
