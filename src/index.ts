@@ -91,3 +91,18 @@ function listarConsultasPorStatus(
 ): Consulta[] {
   return consultas.filter((c) => c.status === status);
 }
+
+function listarConsultasFuturas(
+  consultas: Consulta[]
+): Consulta[] {
+  const hoje = new Date();
+  return consultas.filter((c) => c.data > hoje);
+}
+
+function calcularFaturamento(
+  consultas: Consulta[]
+): number {
+  return consultas
+    .filter((c) => c.status === "realizada")
+    .reduce((total, c) => total + c.valor, 0);
+}
