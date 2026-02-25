@@ -69,3 +69,52 @@ Valor: ${valorFormatado}
 Status: ${consulta.status}
 `;
 }
+const consulta1 = criarConsulta(1, medico1, paciente1, new Date(), 350);
+
+const consulta2: Consulta = {
+  ...consulta1,
+  id: 2,
+  status: "realizada",
+};
+
+const consulta3: Consulta = {
+  ...consulta1,
+  id: 3,
+  status: "cancelada",
+};
+
+const consultas: Consulta[] = [consulta1, consulta2, consulta3];
+
+function listarConsultasPorStatus(
+  consultas: Consulta[],
+  status: StatusConsulta
+): Consulta[] {
+  return consultas.filter((c) => c.status === status);
+}
+
+function listarConsultasFuturas(
+  consultas: Consulta[]
+): Consulta[] {
+  const hoje = new Date();
+  return consultas.filter((c) => c.data > hoje);
+}
+
+function calcularFaturamento(
+  consultas: Consulta[]
+): number {
+  return consultas
+    .filter((c) => c.status === "realizada")
+    .reduce((total, c) => total + c.valor, 0);
+}
+console.log("=== CONSULTAS REALIZADAS ===");
+listarConsultasPorStatus(consultas, "realizada").forEach((c) =>
+  console.log(exibirConsulta(c))
+);
+
+console.log("Faturamento total:");
+console.log(
+  calcularFaturamento(consultas).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  })
+);
